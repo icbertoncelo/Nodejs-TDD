@@ -2,8 +2,13 @@ const request = require("supertest");
 
 const app = require("../../src/server");
 const { User } = require("../../src/app/models");
+const truncate = require("../utils/truncate");
 
 describe("Authentication", () => {
+  beforeEach(async () => {
+    await truncate();
+  });
+
   it("should be able to authenticate with valid credentials", async () => {
     const user = await User.create({
       name: "Ian Carlos",
