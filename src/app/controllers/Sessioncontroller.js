@@ -13,7 +13,10 @@ class SessionController {
     if (!(await user.checkPassword(password))) {
       return res.status(401).json({ message: "Incorrect Password" });
     }
-    return res.status(200).send();
+
+    return res.json({
+      token: await user.generateToken()
+    });
   }
 }
 
